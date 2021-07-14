@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- linking our stylesheet -->
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{{ url_for('static', filename='style.css') }}"
+		/>
+		<title>Checkerboard</title>
+	</head>
+	<body>
+		<div class="center flex">
+			<ul class="container flex">
+				{% for x in range(row_pair): %}
+					{% for x in range(column_pair): %}
+					<li class="box flex" style="background-color:{{ first_color }}"></li> 
+					<li class="box flex" style="background-color:{{ second_color }}"></li>
+					{% endfor %}
+					{% for x in range(column_pair): %}
+					<li class="box flex" style="background-color:{{ second_color }}"></li>
+					<li class="box flex" style="background-color:{{ first_color }}"></li>
+					{% endfor %}
+				{% endfor %}
+			</ul>
+	</body>
+</html>
