@@ -9,6 +9,13 @@ ORDER BY languages.percentage DESC;
 
 2. What query would you run to display the total number of cities for each country? Your query should return the name of the country and the total number of cities. Your query should arrange the result by the number of cities in descending order. (3)
 
+SELECT countries.name as 'Country', COUNT(cities.name) as 'Number of Cities'
+FROM countries
+LEFT JOIN cities 
+ON countries.id = cities.country_id
+GROUP BY countries.name
+ORDER BY COUNT(cities.name) DESC;
+
 3. What query would you run to get all the cities in Mexico with a population of greater than 500,000? Your query should arrange the result by population in descending order. (1)
 
 SELECT cities.name, cities.population, cities.country_id
@@ -27,6 +34,10 @@ ORDER BY languages.percentage DESC
 
 5. What query would you run to get all the countries with Surface Area below 501 and Population greater than 100,000? (2)
 
+SELECT name AS 'Country', surface_area AS 'Surface Area', population AS 'Population'
+FROM countries
+WHERE surface_area < 501 AND population > 100000
+
 6. What query would you run to get countries with only Constitutional Monarchy with a capital greater than 200 and a life expectancy greater than 75 years? (1)
 
 SELECT name AS 'Country', government_form AS 'Government Form', capital AS 'Capital', life_expectancy AS 'Life Expectancy'
@@ -35,4 +46,14 @@ WHERE government_form = 'Constitutional Monarchy' AND capital > 200 AND life_exp
 
 7. What query would you run to get all the cities of Argentina inside the Buenos Aires district and have the population greater than 500, 000? The query should return the Country Name, City Name, District and Population. (2)
 
+SELECT countries.name AS 'Country Name', cities.name AS 'City Name', cities.district AS 'District', cities.population AS 'Population'
+FROM cities
+JOIN countries ON cities.country_id = countries.id
+WHERE countries.name = 'Argentina' AND cities.district = 'Buenos Aires' AND cities.population > 500000
+
 8. What query would you run to summarize the number of countries in each region? The query should display the name of the region and the number of countries. Also, the query should arrange the result by the number of countries in descending order. (2)
+
+SELECT countries.region AS 'Region', COUNT(countries.name) as 'Countries'
+FROM countries
+GROUP BY countries.region
+ORDER BY 'Countries' DESC
