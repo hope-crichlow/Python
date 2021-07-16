@@ -1,0 +1,62 @@
+Query: Create 3 new dojos
+
+INSERT INTO dojos(name, created_at, updated_at)
+VALUES 
+('Atlanta', NOW(), NOW()),
+('Boston', NOW(), NOW()),
+('Miami', NOW(), NOW())
+
+Query: Delete the 3 dojos you just created
+
+DELETE FROM dojos
+WHERE id IN (1,2,3);
+
+Query: Create 3 more dojos
+
+INSERT INTO dojos(name, created_at, updated_at)
+VALUES 
+('Seattle', NOW(), NOW()),
+('Brooklyn', NOW(), NOW()),
+('Dallas', NOW(), NOW())
+
+Query: Create 3 ninjas that belong to the first dojo
+
+INSERT INTO ninjas(dojo_id, first_name, last_name, created_at, updated_at)
+VALUES 
+(4, 'Christine', 'Aguilar', NOW(), NOW()),
+(4,'Vantia', 'Lambert', NOW(), NOW()),
+(4,'Janelle', 'Charnow', NOW(), NOW())
+
+Query: Create 3 ninjas that belong to the second dojo
+
+INSERT INTO ninjas(dojo_id, first_name, last_name, created_at, updated_at)
+VALUES 
+(5, 'Chris', 'Agar', NOW(), NOW()),
+(5,'Van', 'Lambs', NOW(), NOW()),
+(5,'Jan', 'Chanow', NOW(), NOW())
+
+Query: Create 3 ninjas that belong to the third dojo
+
+INSERT INTO ninjas(dojo_id, first_name, last_name, created_at, updated_at)
+VALUES 
+(6, 'Christa', 'Agarst', NOW(), NOW()),
+(6,'Val', 'Lams', NOW(), NOW()),
+(6,'James', 'Chant', NOW(), NOW())
+
+Query: Retrieve all the ninjas from the first dojo
+
+SELECT * FROM ninjas 
+WHERE dojo_id = 4
+
+Query: Retrieve all the ninjas from the last dojo
+
+SELECT * FROM ninjas 
+WHERE dojo_id = 6
+
+Query: Retrieve the last ninja's dojo
+
+SELECT * FROM ninjas 
+ORDER BY dojo_id DESC 
+LIMIT 1
+
+Submit your .txt file that contains all the queries you ran in the shell
