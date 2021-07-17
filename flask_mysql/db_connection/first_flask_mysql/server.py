@@ -11,7 +11,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    friends = Friend.get_all()
+    return render_template("index.html", friends=friends)
 
 
 @app.route('/allfriends')
@@ -19,7 +20,7 @@ def all_friends():
 
     friends = Friend.get_all()
 
-    return render_template('index.html', friends=friends)
+    return render_template('all_friends.html', friends=friends)
 
 
 @app.route('/create', methods=['POST'])
@@ -32,7 +33,7 @@ def create_friend():
 
     Friend.save(data)
     # NEVER RENDER ON A POST
-    return redirect('/')
+    return redirect('/allfriends')
 
 
 if __name__ == '__main__':   # Ensure this file is being run directly and not from a different module

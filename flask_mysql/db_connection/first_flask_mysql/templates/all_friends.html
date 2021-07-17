@@ -13,10 +13,9 @@
 		/>
 		<!-- LINKED CSS -->
 		<link rel="stylesheet" href="../static/css/style.css" />
-		<title>Home</title>
+		<title>All Friends</title>
 	</head>
 	<body>
-		<h1>Hello Sunshine</h1>
 		<h3>Your Friends</h3>
 
 		<table>
@@ -37,22 +36,6 @@
 				{% endfor %}
 			</tbody>
 		</table>
-
-		<h1>Create A New Friend</h1>
-		<form action="/create" method="POST">
-			<div>
-				<label for="first_name">First Name:</label>
-				<input type="text" name="first_name" />
-			</div>
-			<div>
-				<label for="last_name">Last Name:</label>
-				<input type="text" name="last_name" />
-			</div>
-			<div>
-				<label for="occupation">Occupation:</label>
-				<input type="text" name="occupation" />
-			</div>
-			<input type="submit" value="Submit" />
-		</form>
+		<a class="btn" href="/" role="button">Go Home</a>
 	</body>
 </html>
