@@ -42,19 +42,37 @@ def create_user():
 @app.route('/users/<int:user_id>')
 def show_user(user_id):
 
-    # data = {
-    #     "id": selected_id
-    # }
     get_selected = User.get_one(user_id)
     print(get_selected.first_name)
 
     return render_template('show_one.html', selected_user=get_selected)
 
 
-# @app.route('/users/new')
-# def new_user():
+@app.route('/users/<int:user_id>/edit')
+# Displays current values as placeholders
+def edit(user_id):
+    get_selected = User.get_one(user_id)
+    # print(get_selected.first_name)
+    # edit_user_form(user_id)
+    return render_template('edit_user.html', selected_user=get_selected)
 
-#     return render_template('new_user.html')
+
+@app.route('/edit/<int:user_id>', methods=['POST'])
+def edit_user_form(user_id):
+    print(user_id)
+
+    # selected_user.user_id == user_id
+    data = {
+        'user_id': user_id,
+        'first_name': request.form['first_name'],
+        'last_name': request.form['last_name'],
+        'email': request.form['email']
+    }
+    print('************************')
+
+    print(data)
+    User.edit_one(data)
+    return redirect('/')
 
 
 if __name__ == '__main__':   # Ensure this file is being run directly and not from a different module
