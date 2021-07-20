@@ -28,19 +28,21 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for user in users: %}
 				<tr>
-					<td>{{ user.user_id}}</td>
-					<td>{{ user.first_name }} {{ user.last_name }}</td>
-					<td>{{ user.email }}</td>
-					<td>{{ user.created_at }}</td>
+					<td>{{ selected_user.user_id}}</td>
 					<td>
-						<a href="/users/{{user.user_id}}">Show</a>
-						<a href="/users/{{user.user_id}}">Edit</a>
-						<a href="/users/{{user.user_id}}">Delete</a>
+						Full Name: {{ selected_user.first_name }} {{ selected_user.last_name
+						}}
+					</td>
+					<td>{{ selected_user.email }}</td>
+					<td>Created On: {{ selected_user.created_at }}</td>
+					<td>Last Updated: {{ selected_user.updated_on }}</td>
+					<td>
+						<!-- <a href="/users/{{selected_user.user_id}}">Show</a> -->
+						<a href="/users/{{selected_user.user_id}}/edit">Edit</a>
+						<a href="/users/{{selected_user.user_id}}">Delete</a>
 					</td>
 				</tr>
-				{% endfor %}
 			</tbody>
 		</table>
 

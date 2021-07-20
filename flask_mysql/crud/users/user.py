@@ -5,7 +5,7 @@ from mysqlconnection import connectToMySQL
 
 class User:
     def __init__(self, data):
-        self.id = data['user_id']
+        self.user_id = data['user_id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
@@ -27,15 +27,21 @@ class User:
 
     @classmethod
     def get_one(cls, user_id):
-        query = "SELECT * FROM users WHERE id=%(user_id)d;"
+        # user_id = int(user_id)
+        query = "SELECT * FROM users WHERE user_id=%(user_id)s;"
 
         data = {
             "user_id": user_id
         }
+        print(data)
+
         results = connectToMySQL('users').query_db(query, data)
+        print(results)
+
+        # return results
         # This is just an example of what you could do with the results.
         if len(results) > 0:
-            return results[0]
+            return cls(results[0])
         else:
             return False
 
