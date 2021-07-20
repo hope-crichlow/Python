@@ -48,7 +48,7 @@ def show_user(user_id):
     get_selected = User.get_one(user_id)
     print(get_selected.first_name)
 
-    return render_template('show.html', selected_user=get_selected)
+    return render_template('show_one.html', selected_user=get_selected)
 
 
 # @app.route('/users/new')

@@ -1,5 +1,6 @@
 # import the function that will return an instance of a connection
 from mysqlconnection import connectToMySQL
+from datetime import datetime
 # model the class after the user table from our database
 
 
@@ -9,8 +10,9 @@ class User:
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
-        self.created_at = data['created_at']
-        self.updated_at = data['updated_at']
+        self.created_at = data['created_at'].strftime("%B, %d, %Y")
+        self.updated_at = data['updated_at'].strftime("%B, %d, %Y at %I:%M:%p")
+        self.created_at_date = self.created_at
     # Now we use class methods to query our database
 
     @classmethod
@@ -38,8 +40,8 @@ class User:
         results = connectToMySQL('users').query_db(query, data)
         print(results)
 
-        # return results
         # This is just an example of what you could do with the results.
+        # Because results returns a LIST OF DICTIONARIES:
         if len(results) > 0:
             return cls(results[0])
         else:

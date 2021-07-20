@@ -16,36 +16,34 @@
 		<title>Read (All)</title>
 	</head>
 	<body>
-		<h1>All Users</h1>
+		<h1>User {{ selected_user.user_id}}</h1>
+		<a href="/">Home</a>
 		<table>
 			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Full Name</th>
-					<th>Email</th>
-					<th>Created At</th>
-					<th>Actions</th>
-				</tr>
+				<tr></tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>{{ selected_user.user_id}}</td>
-					<td>
-						Full Name: {{ selected_user.first_name }} {{ selected_user.last_name
-						}}
-					</td>
+					<td>Full Name:</td>
+					<td>{{ selected_user.first_name }} {{ selected_user.last_name }}</td>
+				</tr>
+				<tr>
+					<td>Email:</td>
 					<td>{{ selected_user.email }}</td>
-					<td>Created On: {{ selected_user.created_at }}</td>
-					<td>Last Updated: {{ selected_user.updated_on }}</td>
-					<td>
-						<!-- <a href="/users/{{selected_user.user_id}}">Show</a> -->
-						<a href="/users/{{selected_user.user_id}}/edit">Edit</a>
-						<a href="/users/{{selected_user.user_id}}">Delete</a>
-					</td>
+				</tr>
+				<tr>
+					<td>Created On:</td>
+					<td>{{ selected_user.created_at_date}}</td>
+				</tr>
+				<tr>
+					<td>Last Updated On:</td>
+					<td>{{ selected_user.updated_at }}</td>
 				</tr>
 			</tbody>
 		</table>
-
-		<a class="btn" href="/users/new">Add a New User</a>
+		<!-- <a href="/users/{{selected_user.user_id}}">Show</a> -->
+		<a href="/users/{{selected_user.user_id}}/edit">Edit</a>
+		<a href="/users/{{selected_user.user_id}}">Delete</a>
+		<!-- <a class="btn" href="/users/new">Add a New User</a> -->
 	</body>
 </html>
