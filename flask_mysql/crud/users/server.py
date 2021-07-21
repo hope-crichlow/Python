@@ -61,7 +61,6 @@ def edit(user_id):
 def edit_user_form(user_id):
     print(user_id)
 
-    # selected_user.user_id == user_id
     data = {
         'user_id': user_id,
         'first_name': request.form['first_name'],
@@ -69,10 +68,20 @@ def edit_user_form(user_id):
         'email': request.form['email']
     }
     print('************************')
-
+    user_id = user_id
     print(data)
     User.edit_one(data)
-    return redirect('/')
+    return redirect('/users/%i' % user_id)
+
+
+@app.route('/delete/<int:user_id>')
+def delete_user(user_id):
+    data = {
+        'user_id': user_id
+    }
+    User.delete_one(data)
+
+    return redirect('/users')
 
 
 if __name__ == '__main__':   # Ensure this file is being run directly and not from a different module

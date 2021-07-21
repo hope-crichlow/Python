@@ -13,7 +13,7 @@
 		/>
 		<!-- LINKED CSS -->
 		<link rel="stylesheet" href="../static/css/style.css" />
-		<title>Read (All)</title>
+		<title>Read (One)</title>
 	</head>
 	<body>
 		<h1>User {{ selected_user.user_id}}</h1>
@@ -41,9 +41,8 @@
 				</tr>
 			</tbody>
 		</table>
-		<!-- <a href="/users/{{selected_user.user_id}}">Show</a> -->
+
 		<a href="/users/{{selected_user.user_id}}/edit">Edit</a>
-		<a href="/users/{{selected_user.user_id}}">Delete</a>
-		<!-- <a class="btn" href="/users/new">Add a New User</a> -->
+		<a href="/delete/{{selected_user.user_id}}">Delete</a>
 	</body>
 </html>

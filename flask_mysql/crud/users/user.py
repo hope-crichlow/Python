@@ -57,16 +57,14 @@ class User:
     @classmethod
     def edit_one(cls, data):
         query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s, updated_at=NOW() WHERE user_id=%(user_id)s;"
-
         print(data)
 
         results = connectToMySQL('users').query_db(query, data)
         print(results)
 
-        # This is just an example of what you could do with the results.
-        # Because results returns a LIST OF DICTIONARIES:
-        # if len(results) > 0:
-        #     return cls(results[0])
-        # else:
-        #     return False
         return results
+
+    @classmethod
+    def delete_one(cls, data):
+        query = "DELETE FROM users WHERE user_id=%(user_id)s;"
+        return connectToMySQL('users').query_db(query, data)
