@@ -76,7 +76,7 @@ class User:
         # Last name
         # Submission required - make sure it's not an empty string
         if len(user['last_name']) == 0:
-            flash("last name is required.", "last_name")
+            flash("Last name is required.", "last_name")
             is_valid = False
         # is at least 2 characters
         elif len(user['last_name']) < 2:
@@ -94,7 +94,7 @@ class User:
             is_valid = False
         # Valid email format
         elif not EMAIL_REGEX.match(user['email']):
-            flash("invalid email format. Must meet name@emaildomain.com format.")
+            flash("Invalid email format. Must meet name@emaildomain.com format.")
             is_valid = False
         # Unique in database
         elif not User.is_email_not_in_database(user):

@@ -18,57 +18,71 @@
 		<div class="container">
 			<h1>Login and Registration</h1>
 			<h2>Register</h2>
-			<form action="/register" method="POST">
-				<label for="first_name">First Name:</label>
-				<input type="text" name="first_name" />
-				{% with f_name_error =
-				get_flashed_messages(category_filter=['first_name']) %} {% if
-				f_name_error: %} {% for message in f_name_error: %}
-				<p class="text-danger">{{ message }}</p>
-				{% endfor %} {% endif %} {% endwith %}
+			<form class="row g-3" action="/register" method="POST">
+				<div class="col-md-6">
+					<label class="form-label" for="first_name">First Name:</label>
+					<input type="text" class="form-control" name="first_name" />
+					{% with f_name_error =
+					get_flashed_messages(category_filter=['first_name']) %} {% if
+					f_name_error: %} {% for message in f_name_error: %}
+					<p class="text-danger">{{ message }}</p>
+					{% endfor %} {% endif %} {% endwith %}
+				</div>
+				<div class="col-md-6">
+					<label class="form-label" for="last_name">Last Name:</label>
+					<input type="text" class="form-control" name="last_name" />
+					{% with l_name_error =
+					get_flashed_messages(category_filter=['last_name']) %} {% if
+					l_name_error: %} {% for message in l_name_error: %}
+					<p class="text-danger">{{ message }}</p>
+					{% endfor %} {% endif %} {% endwith %}
+				</div>
 
-				<label for="last_name">Last Name:</label>
-				<input type="text" name="last_name" />
-				{% with l_name_error =
-				get_flashed_messages(category_filter=['last_name']) %} {% if
-				l_name_error: %} {% for message in l_name_error: %}
-				<p class="text-danger">{{ message }}</p>
-				{% endfor %} {% endif %} {% endwith %}
+				<div class="col-12">
+					<label class="form-label" for="email">Email:</label>
+					<input type="text" class="form-control" name="email" />
+					{% with email_error = get_flashed_messages(category_filter=['email'])
+					%} {% if email_error: %} {% for message in email_error: %}
+					<p class="text-danger">{{ message }}</p>
+					{% endfor %} {% endif %} {% endwith %}
+				</div>
 
-				<label for="email">Email:</label>
-				<input type="text" name="email" />
-				{% with email_error = get_flashed_messages(category_filter=['email']) %}
-				{% if email_error: %} {% for message in email_error: %}
-				<p class="text-danger">{{ message }}</p>
-				{% endfor %} {% endif %} {% endwith %}
+				<div class="col-md-6">
+					<label class="form-label" for="password">Password:</label>
+					<input type="password" class="form-control" name="password" />
+					{% with password_error =
+					get_flashed_messages(category_filter=['password'])%} {% if
+					password_error: %} {% for message in password_error: %}
+					<p class="text-danger">{{ message }}</p>
+					{% endfor %} {% endif %} {% endwith %}
+				</div>
+				<div class="col-md-6">
+					<label class="form-label" for="confirm_password"
+						>Confirm Password:</label
+					>
+					<input type="password" class="form-control" name="confirm_password" />
+				</div>
 
-				<label for="password">Password:</label>
-				<input type="password" name="password" />
-				{% with password_error =
-				get_flashed_messages(category_filter=['password'])%} {% if
-				password_error: %} {% for message in password_error: %}
-				<p class="text-danger">{{ message }}</p>
-				{% endfor %} {% endif %} {% endwith %}
-
-				<label for="confirm_password">Confirm Password:</label>
-				<input type="password" name="confirm_password" />
-				<div>
+				<div class="col-12">
 					<input type="submit" value="Register" />
 				</div>
 			</form>
 			<div>
 				<h1>Login</h1>
-				<form action="/login" method="POST">
-					<label for="email">Email:</label>
-					<input type="text" name="email" />
-					{% with email_error =
-					get_flashed_messages(category_filter=['login_email']) %} {% if
-					email_error: %} {% for message in email_error: %}
-					<p class="text-danger">{{ message }}</p>
-					{% endfor %} {% endif %} {% endwith %}
-
-					<label for="password">Password:</label>
-					<input type="password" name="password" />
+				<form class="row g-3" action="/login" method="POST">
+					<div class="col-md-6">
+						<label class="form-label" for="email">Email:</label>
+						<input type="text" class="form-control" name="email" />
+						{% with email_error =
+						get_flashed_messages(category_filter=['login_email']) %} {% if
+						email_error: %} {% for message in email_error: %}
+						<p class="text-danger">{{ message }}</p>
+						{% endfor %} {% endif %} {% endwith %}
+					</div>
+					<div class="col-md-6">
+						<label class="form-label" for="password">Password:</label>
+						<input type="password" class="form-control" name="password" />
+					</div>
 
 					<div>
 						<input type="submit" value="Login" />
