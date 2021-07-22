@@ -57,7 +57,7 @@ class User:
             return cls(results[0])
 
     @staticmethod
-    def validate_regiatration(user):
+    def validate_registration(user):
         is_valid = True
 
         # Submission required - make sure it's not an empty string
