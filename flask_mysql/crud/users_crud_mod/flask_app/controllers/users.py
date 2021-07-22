@@ -1,14 +1,12 @@
-from flask import Flask, render_template, request, redirect, session
-# Import the class itself
-from user import User
-# Create a new instance of the Flask class called 'app'
-app = Flask(__name__)
-
+from flask_app import app
+from flask import render_template, redirect, request, session, flash
+import flask_app.models.user import User
 
 @app.route('/')
 def index():
+    users = User.get_all()
 
-    return redirect('/users')
+    return render_template('index.html', users=users)
 
 
 @app.route('/users')
@@ -66,6 +64,7 @@ def edit_user_form(user_id):
         'email': request.form['email']
     }
     print('************************')
+    user_id = user_id
     print(data)
     User.edit_one(data)
     return redirect('/users/%i' % user_id)
@@ -79,7 +78,3 @@ def delete_user(user_id):
     User.delete_one(data)
 
     return redirect('/users')
-
-
-if __name__ == '__main__':   # Ensure this file is being run directly and not from a different module
-    app.run(debug=True)    # Run the app in debug mode.

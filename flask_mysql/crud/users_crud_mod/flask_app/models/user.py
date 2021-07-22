@@ -1,5 +1,5 @@
 # import the function that will return an instance of a connection
-from mysqlconnection import connectToMySQL
+from flask_app.config.mysqlconnection import connectToMySQL
 from datetime import datetime
 # model the class after the user table from our database
 
@@ -12,7 +12,7 @@ class User:
         self.email = data['email']
         self.created_at = data['created_at'].strftime("%B, %d, %Y")
         self.updated_at = data['updated_at'].strftime("%B, %d, %Y at %I:%M:%p")
-
+        self.created_at_date = self.created_at
     # Now we use class methods to query our database
 
     @classmethod
