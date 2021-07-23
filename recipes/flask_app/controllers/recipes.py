@@ -5,20 +5,13 @@ from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_bcrypt import Bcrypt
 from flask_app.models.user import User
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
+from flask_app.models.recipe import Recipe
 
 
 
 
-# @app.route('/dashboard')
-# def show_ninjas(dojo_id):
-#     get_selected = Dojo.get_one(dojo_id)
 
-#     ninjas = Ninja.get_all_ninjas_from_dojo(dojo_id)
-#     # print(ninjas.dojo_id)
-
-#     return render_template('show_dojo.html', ninjas=ninjas, selected_dojo=get_selected)
+@app.route('/recipes/<int:id>')
+def view_recipe(id):
+    get_selected = Recipe.get_one(id)
+    return render_template('view.html', selected_recipe=get_selected)

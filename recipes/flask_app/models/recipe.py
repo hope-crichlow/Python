@@ -4,6 +4,7 @@ from flask import render_template, redirect, request, session, flash
 from flask_bcrypt import Bcrypt
 
 
+
 class Recipe:
     def __init__(self, data):
         self.id = data['id']
@@ -12,11 +13,10 @@ class Recipe:
         self.description = data['description']
         self.instructions = data['instructions']
         self.under_thirty = data['under_thirty']
-        self.date_made = data['date_made']
+        self.date_made = data['date_made'].strftime("%B, %d, %Y")
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
     # Now we use class methods to query our database
-
 
     @classmethod
     def get_all(cls):
@@ -35,3 +35,15 @@ class Recipe:
         #     return cls(results[0])
         # else:
         #     return False
+
+    @classmethod
+    def get_one(cls, id):
+        query = "SELECT * FROM recipes WHERE id=%(id)s;"
+
+        data = {
+            "id": id
+        }
+        results = connectToMySQL('recipes').query_db(query, data)
+        print('/////////', results)
+        recipe = cls(results[0])
+        return recipe

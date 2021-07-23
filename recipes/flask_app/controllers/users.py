@@ -65,3 +65,12 @@ def dashboard():
 def logout():
     session.clear()
     return redirect('/')
+
+###################################
+
+
+@app.route('/recipes/<int:id>')
+def view_recipe(id):
+
+    get_selected = Recipe.get_one(id)
+    return render_template('view.html', selected_recipe=get_selected)

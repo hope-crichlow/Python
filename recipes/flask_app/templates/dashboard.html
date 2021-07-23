@@ -16,14 +16,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<!-- <nav>
-				<div>
-					<h1>Welcome Back, {{recipe.first_name}}!</h1>
-				</div>
-				<div>
-					<a href="/recipes/new">Create</a>
-				</div>
-			</nav> -->
+
 
 			<nav
 				class="navbar navbar-light bg-lightstyle="
@@ -62,9 +55,9 @@
 						<td>{{ recipe.name }}</td>
 						<td>{{ recipe.under_thirty }}</td>
 						<td>
-							<a href="/recipes/{{recipe.recipe_id}}">Show</a>
-							<a href="/recipes/{{recipe.recipe_id}}/edit">Edit</a>
-							<a href="/delete/{{recipe.recipe_id}}">Delete</a>
+							<a href="/recipes/{{recipe.id}}">View</a>
+							<a href="/recipes/{{recipe.id}}/edit">Edit</a>
+							<a href="/delete/{{recipe.id}}">Delete</a>
 						</td>
 					</tr>
 					{% endfor %}
