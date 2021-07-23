@@ -62,7 +62,8 @@ def login():
     curreent_user = login_validation
     print('//////////', curreent_user)
     session['user_first_name']= curreent_user.first_name
-    # print('//////////', session['user_first_name'])
+    session['user_id']= curreent_user.id
+    print('//////////', session['user_first_name'])
 
     return redirect('/dashboard')
 
@@ -82,20 +83,25 @@ def new_painting():
 
 @app.route('/create', methods=['POST'])
 def create_painting():
- 
-    data = {
-        'dojo_id': request.form['dojo_id'],
-        'first_name': request.form['first_name'],
-        'last_name': request.form['last_name'],
-        'age': request.form['age']
-    }
+    painting_validation = Painting.validate_new_painting(request.form)
+    if painting_validation == False:
+        return redirect('/paintings/new')
+    else:
+        data = {
+            "user_id": session['user_id'],
+            "title": request.form['title'],
+            "description": request.form['description'],
+            'price': request.form['price']
+        }
+
+
 
     print('****************')
     print(data)
-    painting.save_painting(data)
+    Painting.save_painting(data)
     
     # NEVER RENDER ON A POST
-    return redirect('/')
+    return redirect('/dashboard')
 
 
 @app.route('/paintings/<int:id>')
@@ -122,9 +128,17 @@ def edit_painting_form(id):
         'title': request.form['title'],
         'description': request.form['description'],
         'price': request.form['price'],
-  
     }
     print('************************')
     print(data)
     Painting.edit_one(data)
     return redirect('/paintings/%i' % id)
+
+@app.route('/delete/<int:id>')
+def delete_user(id):
+    data = {
+        'id': id
+    }
+    Painting.delete_one(data)
+
+    return redirect('/dashboard')

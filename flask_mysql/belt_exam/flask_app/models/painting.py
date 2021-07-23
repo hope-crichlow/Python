@@ -26,8 +26,8 @@ class Painting:
         #"SELECT * FROM paintings JOIN users ON users.id = paintings.user_id;"
         # make sure to call the connectToMySQL function with the schema you are targeting.
         results = connectToMySQL('belt_exam').query_db(query)
-        print('````````````````````````')
-        print(results , "\n")
+        # print('````````````````````````')
+        # print(results , "\n")
         # Create an empty list to append our instances of paintings
         paintings = []
         # Iterate over the db results and create instances of paintings with cls.
@@ -53,7 +53,7 @@ class Painting:
 
     @classmethod
     def edit_one(cls, data):
-        query = "UPDATE paintings SET title=%(title)s, description=%(description)s, price=%(price)s WHERE id=%(id)s;"
+        query = "UPDATE paintings SET title=%(title)s, description=%(description)s, price=%(price)s WHERE id=%(id)d;"
         #, quantity=%(quantity)s, artist=%(artist)s, num_purchased=%(num_purchased)s
         print("lalalalalalalalalal*****************")
         print(data)
@@ -62,3 +62,49 @@ class Painting:
         print(results)
 
         return results
+
+    @classmethod
+    def save_painting(cls, data):
+        query = "INSERT INTO paintings (user_id, title, description, price) VALUES (%(user_id)s, %(title)s, %(description)s, %(price)s);"
+        return connectToMySQL('belt_exam').query_db(query, data)
+
+    @staticmethod
+    def validate_new_painting(form_data):
+        is_valid = True
+
+        # Title
+        # Submission required - make sure it's not an empty string
+        if len(form_data['title']) == 0:
+            flash("Title is required.", "title")
+            is_valid = False
+        # is at least 2 characters
+        elif len(form_data['title']) < 2:
+            flash("Title must be at least 2 characters in length.", "title")
+            is_valid = False
+        
+        # Description
+        # Submission required - make sure it's not an empty string
+        if len(form_data['description']) == 0:
+            flash("Description is required.", "description")
+            is_valid = False
+        # is at least 10 characters
+        elif len(form_data['description']) < 10:
+            flash("Description must be at least 10 characters in length.", "description")
+            is_valid = False
+
+        # Price
+        # Submission required - make sure it's not an empty string
+        if len(form_data['price']) == 0:
+            flash("Price is required.", "price")
+            is_valid = False
+        # is at least 10 characters
+        elif len(form_data['price']) < 1:
+            flash("Price must be greater than $10.", "price")
+            is_valid = False
+
+        return is_valid
+
+    @classmethod
+    def delete_one(cls, data):
+        query = "DELETE FROM paintings WHERE id=%(id)s;"
+        return connectToMySQL('belt_exam').query_db(query, data)

@@ -55,9 +55,10 @@
 						<td><a href="/paintings/{{painting.id}}">{{ painting.title }}</a></td> 
 						<td>By {{ painting.user_id}}</td>
 						<td>
-							
+						{% if painting.user_id == session['user_id'] %}
 							<a href="/paintings/edit/{{painting.id}}">Edit</a>
 							<a href="/delete/{{painting.id}}">Delete</a>
+						{% endif %}
 						</td>
 					</tr>
 					{% endfor %}

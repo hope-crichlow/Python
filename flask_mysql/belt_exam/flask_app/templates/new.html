@@ -44,6 +44,10 @@
 						value=""
 						placeholder=""
 					/>
+					{% with title_error = get_flashed_messages(category_filter=['title'])
+					%} {% if title_error: %} {% for message in title_error: %}
+					<p class="text-danger">{{ message }}</p>
+					{% endfor %} {% endif %} {% endwith %}
 				</div>
 				<div class="col-md-10">
 					<label class="form-label" for="description">Description:</label>
@@ -54,6 +58,11 @@
 						value=""
 						placeholder=""
 					/>
+					{% with description_error =
+					get_flashed_messages(category_filter=['description']) %} {% if
+					description_error: %} {% for message in description_error: %}
+					<p class="text-danger">{{ message }}</p>
+					{% endfor %} {% endif %} {% endwith %}
 				</div>
 				<div class="col-md-10">
 					<label class="form-label" for="price">price:</label>
@@ -64,6 +73,10 @@
 						value=""
 						placeholder=""
 					/>
+					{% with price_error = get_flashed_messages(category_filter=['price'])
+					%} {% if price_error: %} {% for message in price_error: %}
+					<p class="text-danger">{{ message }}</p>
+					{% endfor %} {% endif %} {% endwith %}
 				</div>
 
 				<div class="col-12">
