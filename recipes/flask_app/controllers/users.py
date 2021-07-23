@@ -29,17 +29,9 @@ def register():
         'password': hashed_password
     }
 
-    session['user-id'] = User.save(data)
-    return redirect('/dashboard')
+    session['user_id'] = User.save(data)
+    print('////////////', session['user_id'])
 
-
-@app.route('/login', methods=['POST'])
-def login():
-    login_validation = User.validate_login(request.form)
-    if not login_validation:
-        return redirect('/')
-
-    session['user_id'] = login_validation.id
     return redirect('/dashboard')
 
 
@@ -61,6 +53,16 @@ def dashboard():
     return render_template('dashboard.html', user=logged_in_user, recipes=recipes)
 
 
+@app.route('/login', methods=['POST'])
+def login():
+    login_validation = User.validate_login(request.form)
+    if not login_validation:
+        return redirect('/')
+
+    session['user_id'] = login_validation.id
+    return redirect('/dashboard')
+
+
 @app.route('/logout')
 def logout():
     session.clear()
@@ -74,3 +76,30 @@ def view_recipe(id):
 
     get_selected = Recipe.get_one(id)
     return render_template('view.html', selected_recipe=get_selected)
+
+
+@app.route('/recipes/edit/<int:id>')
+# Displays current values as placeholders
+def edit(id):
+    get_selected = Recipe.get_one(id)
+
+    return render_template('edit.html', selected_recipe=get_selected)
+
+
+@app.route('/edit/<int:id>', methods=['POST'])
+def edit_recipe_form(id):
+    print(id)
+
+    data = {
+        'id': id,
+        'name': request.form['name'],
+        'description': request.form['description'],
+        'instructions': request.form['instructions'],
+        'date_made': request.form['date_made'],
+        'under_thirty': request.form['under_thirty']
+
+    }
+    print('************************')
+    print(data)
+    Recipe.edit_one(data)
+    return redirect('/recipes/%i' % id)

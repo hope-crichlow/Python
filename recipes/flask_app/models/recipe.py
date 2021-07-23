@@ -47,3 +47,13 @@ class Recipe:
         print('/////////', results)
         recipe = cls(results[0])
         return recipe
+
+    @classmethod
+    def edit_one(cls, data):
+        query = "UPDATE recipes SET name=%(name)s, description=%(description)s, instructions=%(instructions)s, date_made=%(date_made)s, under_thirty=%(under_thirty)s, WHERE id=%(id)s;"
+        print(data)
+
+        results = connectToMySQL('recipes').query_db(query, data)
+        print(results)
+
+        return results
