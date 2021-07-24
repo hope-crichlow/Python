@@ -21,24 +21,19 @@ class Painting:
 
     @classmethod
     def get_all_paintings(cls):
-        query = "SELECT * FROM paintings JOIN users ON users.id = paintings.user_id;"
-        #SELECT painting.title, user.first_name, user.last_name FROM paintings JOIN users ON paintings.user_id = users.id
-        #"SELECT * FROM paintings JOIN users ON users.id = paintings.user_id;"
-        # make sure to call the connectToMySQL function with the schema you are targeting.
+        query ="SELECT paintings.id, paintings.title, paintings.user_id, paintings.description, paintings.price, paintings.quantity, paintings.num_purchased, paintings.created_at, paintings.updated_at, GROUP_CONCAT(users.first_name, ' ', users.last_name) AS artist FROM paintings JOIN users ON paintings.user_id = users.id GROUP BY id;"
+     
         results = connectToMySQL('belt_exam').query_db(query)
-        # print('````````````````````````')
-        # print(results , "\n")
+        print('````````````````````````')
+        print(results)
         # Create an empty list to append our instances of paintings
         paintings = []
         # Iterate over the db results and create instances of paintings with cls.
         for painting in results:
+            print(results)
             paintings.append(cls(painting))
         return paintings
-        # if len(results) > 0:
-        #     return cls(results[0])
-        # else:
-        #     return False
-
+   
     @classmethod
     def get_one(cls, id):
         query = "SELECT * FROM paintings WHERE id=%(id)s;"
@@ -54,7 +49,7 @@ class Painting:
     @classmethod
     def edit_one(cls, data):
         query = "UPDATE paintings SET title=%(title)s, description=%(description)s, price=%(price)s WHERE id=%(id)d;"
-        #, quantity=%(quantity)s, artist=%(artist)s, num_purchased=%(num_purchased)s
+    
         print("lalalalalalalalalal*****************")
         print(data)
 

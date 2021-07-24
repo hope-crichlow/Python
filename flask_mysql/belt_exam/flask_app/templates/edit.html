@@ -12,7 +12,7 @@
 			crossorigin="anonymous"
 		/>
 
-		<title>paintings</title>
+		<title>Painting Edit</title>
 	</head>
 	<body>
 		<div class="container">
@@ -21,7 +21,7 @@
 				style="background-color: #084c7400"
 			>
 				<div class="container-fluid">
-					<a class="navbar-brand"> <h1>Edit Painting</h1></a>
+					<a class="navbar-brand"> <h1>Edit Your Painting</h1></a>
 
 					<form class="d-flex">
 						<button class="btn" type="submit">
@@ -72,40 +72,7 @@
 						placeholder="{{ selected_painting.price}}"
 					/>
 				</div>
-				<!-- <fieldset class="row mb-3"> -->
-				<!-- <div class="col-md-10">
-					<label class="form-label" for="under_thirty">Under 30 Minutes?</label> -->
-				<!-- 
-					<span class="d-flex align-items-center justify-content-around">
-						{% if selected_painting.under_thirty == 1 %}
-						<input name="under_thirty" type="radio" value="1" checked />Yes
-						<input name="under_thirty" type="radio" value="0" />No {% else %}
-						<input name="under_thirty" type="radio" value="1" />Yes
-						<input name="under_thirty" type="radio" value="0" checked />No {%
-						endif %}
-					</span> -->
-				<!-- <div class="form-check">
-						<input
-							class="form-check-input"
-							type="radio"
-							name="gridRadios"
-							id="gridRadios1"
-							value="option1"
-						/>
-						<label class="form-check-label" for="gridRadios1"> Yes </label> -->
-				<!-- </div> -->
-				<!-- <div class="form-check">
-						<input
-							class="form-check-input"
-							type="radio"
-							name="gridRadios"
-							id="gridRadios2"
-							value="option2"
-						/>
-						<label class="form-check-label" for="gridRadios2"> No </label>
-					</div>
-				</div> -->
-				<!-- </fieldset> -->
+			
 				<div class="col-12">
 					<button type="submit" value="Update" class="btn btn-primary">
 						Update
@@ -114,23 +81,7 @@
 				<!-- <input type="submit" value="Update" /> -->
 			</form>
 
-			<!-- <h3>{{selected_painting.name}}</h3>
-			<div class="card">
-				<dl class="card-body row">
-					<dt class="col-sm-3">Description:</dt>
-					<dd class="col-sm-9">{{ selected_painting.description }}</dd>
-					<dt class="col-sm-3">Under 30 minutes:</dt>
-					<dd class="col-sm-9">{{ selected_painting.under_thirty }}</dd>
-
-					<dt class="col-sm-3 text-truncate">price:</dt>
-					<dd class="col-sm-9">{{ selected_painting.price }}</dd>
-					<dt class="col-sm-3">Date Made:</dt>
-					<dd class="col-sm-9">
-						<p>{{ selected_painting.date_made }}</p>
-					</dd>
-				</dl> -->
-
-			<!-- </div> -->
+		
 		</div>
 	</body>
 </html>

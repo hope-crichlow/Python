@@ -12,7 +12,7 @@
 			crossorigin="anonymous"
 		/>
 
-		<title>paintings</title>
+		<title>Painting Show</title>
 	</head>
 	<body>
 		<div class="container">
@@ -39,16 +39,16 @@
 					</form>
 				</div>
 			</nav>
-			<h3>{{selected_painting.title}}</h3>
+			<h1>{{selected_painting.title}}</h1>
 			<div class="card">
 				<dl class="card-body row">
 					<dt class="col-sm-3">Painted by</dt>
-					<dd class="col-sm-9">{{ selected_painting.user_id}}</dd>
+					<dd class="col-sm-9">
+						{{ artist.first_name }} {{ artist.last_name }}
+					</dd>
 					<dt class="col-sm-3">Description:</dt>
 					<dd class="col-sm-9">{{ selected_painting.description }}</dd>
 
-					<!-- <dt class="col-sm-3 text-truncate">Instructions:</dt>
-					<dd class="col-sm-9">{{ selected_painting.instructions }}</dd> -->
 					<dt class="col-sm-3">Price:</dt>
 					<dd class="col-sm-9">
 						<p>${{ selected_painting.price }}</p>

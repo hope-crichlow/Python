@@ -21,17 +21,19 @@ class Painting:
 
     @classmethod
     def get_all_paintings(cls):
-        query = "SELECT * FROM paintings JOIN users ON users.id = paintings.user_id;"
+        query ="SELECT paintings.id, paintings.title, paintings.user_id, paintings.description, paintings.price, paintings.quantity, paintings.num_purchased, created_at, updated_at, group_concat(users.first_name, ' ', users.last_name) AS artist FROM paintings JOIN users ON paintings.user_id = users.id GROUP BY id;"
+        # "SELECT * FROM paintings JOIN users ON users.id = paintings.user_id;"
         #SELECT painting.title, user.first_name, user.last_name FROM paintings JOIN users ON paintings.user_id = users.id
         #"SELECT * FROM paintings JOIN users ON users.id = paintings.user_id;"
         # make sure to call the connectToMySQL function with the schema you are targeting.
         results = connectToMySQL('belt_exam').query_db(query)
-        # print('````````````````````````')
-        # print(results , "\n")
+        print('````````````````````````')
+        print(results)
         # Create an empty list to append our instances of paintings
         paintings = []
         # Iterate over the db results and create instances of paintings with cls.
         for painting in results:
+            print(results)
             paintings.append(cls(painting))
         return paintings
         # if len(results) > 0:
@@ -104,7 +106,7 @@ class Painting:
 
         return is_valid
 
-        @classmethod
+    @classmethod
     def delete_one(cls, data):
-        query = "DELETE FROM users WHERE user_id=%(user_id)s;"
-        return connectToMySQL('users').query_db(query, data)
+        query = "DELETE FROM paintings WHERE id=%(id)s;"
+        return connectToMySQL('belt_exam').query_db(query, data)

@@ -44,7 +44,7 @@
 					<tr>
 					
 						<th>Name</th>
-						<th>Under 30 Minutes</th>
+						<th>Artist</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -53,7 +53,7 @@
 					{% for painting in paintings: %}
 					<tr>
 						<td><a href="/paintings/{{painting.id}}">{{ painting.title }}</a></td> 
-						<td>By {{ painting.user_id}}</td>
+						<td>By {{ painting.artist}}</td>
 						<td>
 						{% if painting.user_id == session['user_id'] %}
 							<a href="/paintings/edit/{{painting.id}}">Edit</a>
@@ -64,7 +64,6 @@
 					{% endfor %}
 				</tbody>
 			</table>
-
 		</div>
 	</body>
 </html>
