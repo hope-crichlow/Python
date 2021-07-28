@@ -58,11 +58,11 @@
                         <td>By {{ band.genre}}</td>
 						<td>
 						{% if band.founder_id == session['user_id'] %}
-							<a href="/bands/edit/{{band.id}}">Edit</a>
+							<a href="/edit/{{band.id}}">Edit</a>
 							<a href="/delete/{{band.id}}">Delete</a>
 						{% endif %}
                         {% if band.founder_id != session['user_id'] %}
-							<a href="/bands/join/{{band.id}}">Join</a>
+							<a href="/join/{{band.id}}">Join</a>
 						{% endif %}
 						</td>
 					</tr>

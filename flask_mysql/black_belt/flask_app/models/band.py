@@ -29,11 +29,38 @@ class Band:
             print(results)
             bands.append(cls(band))
         return bands
+    
+    @classmethod
+    def get_one(cls, id):
+        query = "SELECT * FROM bands WHERE id=%(id)s;"
+
+        data = {
+            "id": id,
+            "founder_id": session['user_id'],
+            "founding_member": " "
+        }
+        results = connectToMySQL('band_together').query_db(query, data)
+        print('/////////', results)
+        band = cls(results[0])
+        return band
+
 
     @classmethod
     def save_band(cls, data):
         query = "INSERT INTO bands (founder_id, band_name, genre, home_city) VALUES (%(founder_id)s, %(band_name)s, %(genre)s, %(home_city)s);"
         return connectToMySQL('band_together').query_db(query, data)
+
+    @classmethod
+    def edit_one(cls, data):
+        query = "UPDATE bands SET band_name=%(band_name)s, genre=%(genre)s, home_city=%(home_city)s WHERE id=%(id)s;"
+
+        print("lalalalalalalalalal*****************")
+        print(data)
+
+        results = connectToMySQL('band_together').query_db(query, data)
+        print(results)
+
+        return results
 
     @staticmethod
     def validate_new_band(form_data):

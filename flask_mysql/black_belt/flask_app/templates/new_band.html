@@ -41,6 +41,7 @@
 			</nav>
 			
 			<form class="row g-3" action="/create" method="post">
+				<h3>Create A Band</h3>
 				<div class="col-md-6">
 					<label class="form-label" for="band_name">Band Name:</label>
 					<input
@@ -55,7 +56,7 @@
 					<p class="text-danger">{{ message }}</p>
 					{% endfor %} {% endif %} {% endwith %}
 				</div>
-				<div class="col-md-6>
+				<div class="col-md-6">
 					<label class="form-label" for="genre">Music Genre:</label>
 					<input
 						class="form-control"
@@ -70,7 +71,7 @@
 					<p class="text-danger">{{ message }}</p>
 					{% endfor %} {% endif %} {% endwith %}
 				</div>
-				<div class="col-md-6>
+				<div class="col-md-6">
 					<label class="form-label" for="home_city">Home City:</label>
 					<input
 						class="form-control"
@@ -87,7 +88,7 @@
 
 				<div class="col-12">
 					<button type="submit" value="Update" class="btn btn-primary">
-						Update
+						Create
 					</button>
 				</div>
 

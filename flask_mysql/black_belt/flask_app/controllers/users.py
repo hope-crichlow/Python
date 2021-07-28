@@ -98,9 +98,9 @@ def logout():
 
 
 @app.route('/new/sighting')
-def new_painting():
-    # if 'user_id' not in session:
-    #     return redirect('/')
+def new_band():
+    if 'user_id' not in session:
+        return redirect('/')
 
     return render_template('new_band.html')
 
@@ -109,7 +109,7 @@ def new_painting():
 def create_band():
     band_validation = Band.validate_new_band(request.form)
     if band_validation == False:
-        return redirect('/bands/new')
+        return redirect('/new/sighting')
     else:
         data = {
             "founder_id": session['user_id'],
@@ -121,6 +121,36 @@ def create_band():
     print('****************')
     print(data)
     Band.save_band(data)
-
     # NEVER RENDER ON A POST
+    return redirect('/dashboard')
+
+
+@app.route('/edit/<int:id>')
+def edit(id):
+# Displays current values as placeholders
+    get_selected = Band.get_one(id)
+    print('************************')
+    print('**********GET SELECTED BAND TO EDIT**************', get_selected)
+    print('***********************')
+    print(get_selected.band_name, '\n', get_selected.genre, '\n', get_selected.home_city)
+    
+    return render_template('edit_band.html', selected_band=get_selected)
+
+@app.route('/<int:id>/edit', methods=['POST'])
+def edit_band_form(id):
+    print(id)
+    band_validation = Band.validate_new_band(request.form)
+    if band_validation == False:
+        return redirect('/edit/%i' % id)
+    else:
+        data = {
+            'id': id,
+            'founder_id': session['user_id'],
+            'band_name': request.form['band_name'],
+            'genre': request.form['genre'],
+            'home_city': request.form['home_city']
+        }
+    print('***********!!!!!*************')
+    print(data)
+    Band.edit_one(data)
     return redirect('/dashboard')
