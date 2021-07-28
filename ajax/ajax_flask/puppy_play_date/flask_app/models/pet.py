@@ -33,12 +33,3 @@ class User:
             users.append(user_data)
         return users
 
-# class Pet:
-#     # db = "user_names"
-
-#     def __init__(self, data):
-#         self.id = data['id']
-#         self.name = data['name']
-#         self.type = data['type']
-#         # self.created_at = data['created_at']
-#         # self.updated_at = data['updated_at']
