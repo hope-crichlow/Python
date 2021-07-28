@@ -34,3 +34,39 @@ class Band:
     def save_band(cls, data):
         query = "INSERT INTO bands (founder_id, band_name, genre, home_city) VALUES (%(founder_id)s, %(band_name)s, %(genre)s, %(home_city)s);"
         return connectToMySQL('band_together').query_db(query, data)
+
+    @staticmethod
+    def validate_new_band(form_data):
+        is_valid = True
+
+        # Band Name
+        # Submission required - make sure it's not an empty string
+        if len(form_data['band_name']) == 0:
+            flash("Band Name is required.", "band_name")
+            is_valid = False
+        # is at least 2 characters
+        elif len(form_data['band_name']) < 2:
+            flash("Band Name must be at least 2 characters in length.", "band_name")
+            is_valid = False
+
+        # Genre
+        # Submission required - make sure it's not an empty string
+        if len(form_data['genre']) == 0:
+            flash("Genre is required.", "genre")
+            is_valid = False
+        # is at least 10 characters
+        elif len(form_data['genre']) < 2:
+            flash("Genre must be at least 2 characters in length.", "genre")
+            is_valid = False
+
+        # Home City
+        # Submission required - make sure it's not an empty string
+        if len(form_data['home_city']) == 0:
+            flash("Home City is required.", "home_city")
+            is_valid = False
+        # is at least 10 characters
+        elif len(form_data['home_city']) < 2:
+            flash("Home City must be greater than 2 characters in length.", "home_city")
+            is_valid = False
+
+        return is_valid

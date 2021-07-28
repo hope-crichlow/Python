@@ -15,36 +15,6 @@ def index():
     return render_template('index.html')
 
 
-# @app.route('/dashboard')
-# def dashboard():
-#     return render_template('dashboard.html')
-
-
-@app.route('/dashboard')
-def bands():
-    if 'user_id' not in session:
-        return redirect('/')
-    data = {
-        'id': session['user_id']
-    }
-    logged_in_user = User.get_user_by_id(data)
-    if logged_in_user == False:
-        return redirect('/')
-#######################
-    results = Band.get_all_bands()
-    print('********DATA RETURNED FROM DATABASE**********')
-    print(results)
-    bands = []
-
-    for band in results:
-        print('***********************')
-        print(band.band_name, '\n', band.founding_member, '\n', band.genre)
-        bands.append(band)
-        print('***********************')
-
-    return render_template('dashboard.html', logged_user=logged_in_user, bands=bands)
-
-
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -94,8 +64,63 @@ def login():
     return redirect('/dashboard')
 
 
+@app.route('/dashboard')
+def bands():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        'id': session['user_id']
+    }
+    logged_in_user = User.get_user_by_id(data)
+    if logged_in_user == False:
+        return redirect('/')
+#######################
+    results = Band.get_all_bands()
+    print('********DATA RETURNED FROM DATABASE**********')
+    print(results)
+    bands = []
+
+    for band in results:
+        print('***********************')
+        print(band.band_name, '\n', band.founding_member, '\n', band.genre)
+        bands.append(band)
+        print('***********************')
+
+    return render_template('dashboard.html', logged_user=logged_in_user, bands=bands)
+
+
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
 
+############################################################
+
+
+@app.route('/new/sighting')
+def new_painting():
+    # if 'user_id' not in session:
+    #     return redirect('/')
+
+    return render_template('new_band.html')
+
+
+@app.route('/create', methods=['POST'])
+def create_band():
+    band_validation = Band.validate_new_band(request.form)
+    if band_validation == False:
+        return redirect('/bands/new')
+    else:
+        data = {
+            "founder_id": session['user_id'],
+            "band_name": request.form['band_name'],
+            "genre": request.form['genre'],
+            'home_city': request.form['home_city']
+        }
+
+    print('****************')
+    print(data)
+    Band.save_band(data)
+
+    # NEVER RENDER ON A POST
+    return redirect('/dashboard')

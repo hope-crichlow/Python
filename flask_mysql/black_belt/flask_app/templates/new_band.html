@@ -21,10 +21,11 @@
 				style="background-color: #084c7400"
 			>
 				<div class="container-fluid">
-					<a class="navbar-brand"> <h1>Create A Band</h1></a>
-
+					<a class="navbar-brand">
+						<h1>Rock On {{session['user_first_name']}}!</h1>
+					</a>
 					<form class="d-flex">
-                        <button class="btn" type="submit">
+						<button class="btn" type="submit">
 							<a href="/mybands">My Bands</a>
 						</button>
 						<button class="btn" type="submit">
@@ -36,48 +37,50 @@
 						</button>
 					</form>
 				</div>
+
 			</nav>
+			
 			<form class="row g-3" action="/create" method="post">
 				<div class="col-md-6">
-					<label class="form-label" for="title">Title:</label>
+					<label class="form-label" for="band_name">Band Name:</label>
 					<input
 						class="form-control"
 						type="text"
-						name="title"
+						name="band_name"
 						value=""
 						placeholder=""
 					/>
-					{% with title_error = get_flashed_messages(category_filter=['title'])
-					%} {% if title_error: %} {% for message in title_error: %}
+					{% with band_name_error = get_flashed_messages(category_filter=['band_name'])
+					%} {% if band_name_error: %} {% for message in band_name_error: %}
 					<p class="text-danger">{{ message }}</p>
 					{% endfor %} {% endif %} {% endwith %}
 				</div>
-				<div class="col-md-10">
-					<label class="form-label" for="description">Description:</label>
+				<div class="col-md-6>
+					<label class="form-label" for="genre">Music Genre:</label>
 					<input
 						class="form-control"
 						type="text"
-						name="description"
+						name="genre"
 						value=""
 						placeholder=""
 					/>
-					{% with description_error =
-					get_flashed_messages(category_filter=['description']) %} {% if
-					description_error: %} {% for message in description_error: %}
+					{% with genre_error =
+					get_flashed_messages(category_filter=['genre']) %} {% if
+					genre_error: %} {% for message in genre_error: %}
 					<p class="text-danger">{{ message }}</p>
 					{% endfor %} {% endif %} {% endwith %}
 				</div>
-				<div class="col-md-10">
-					<label class="form-label" for="price">price:</label>
+				<div class="col-md-6>
+					<label class="form-label" for="home_city">Home City:</label>
 					<input
 						class="form-control"
 						type="text"
-						name="price"
+						name="home_city"
 						value=""
 						placeholder=""
 					/>
-					{% with price_error = get_flashed_messages(category_filter=['price'])
-					%} {% if price_error: %} {% for message in price_error: %}
+					{% with home_city_error = get_flashed_messages(category_filter=['home_city'])
+					%} {% if home_city_error: %} {% for message in home_city_error: %}
 					<p class="text-danger">{{ message }}</p>
 					{% endfor %} {% endif %} {% endwith %}
 				</div>

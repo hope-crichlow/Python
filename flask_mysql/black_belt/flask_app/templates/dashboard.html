@@ -28,7 +28,7 @@
 					</a>
 					<form class="d-flex">
 						<button class="btn" type="submit">
-							<a href="/bands/new">Add band</a>
+							<a href="/new/sighting">New Band</a>
 						</button>
 						<div></div>
 						<button class="btn" type="submit">
@@ -44,7 +44,7 @@
 					<tr>
 					
 						<th>Band Name</th>
-						<th>Founding Menmber</th>
+						<th>Founding Member</th>
 						<th>Genre</th>
                         <th>Action</th>
 					</tr>
@@ -54,7 +54,7 @@
 					{% for band in bands: %}
 					<tr>
 						<td>{{ band.band_name }}</a></td> 
-						<td>By {{ band.founding_member}}</td>
+						<td>{{ band.founding_member}}</td>
                         <td>By {{ band.genre}}</td>
 						<td>
 						{% if band.founder_id == session['user_id'] %}
