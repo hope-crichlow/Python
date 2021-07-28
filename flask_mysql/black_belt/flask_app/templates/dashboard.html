@@ -53,14 +53,15 @@
 					
 					{% for band in bands: %}
 					<tr>
-						<td>{ band.name }}</a></td> 
-						<td>By {{ band.artist}}</td>
+						<td>{{ band.band_name }}</a></td> 
+						<td>By {{ band.founding_member}}</td>
+                        <td>By {{ band.genre}}</td>
 						<td>
-						{% if band.user_id == session['user_id'] %}
+						{% if band.founder_id == session['user_id'] %}
 							<a href="/bands/edit/{{band.id}}">Edit</a>
 							<a href="/delete/{{band.id}}">Delete</a>
 						{% endif %}
-                        {% if band.user_id != session['user_id'] %}
+                        {% if band.founder_id != session['user_id'] %}
 							<a href="/bands/join/{{band.id}}">Join</a>
 						{% endif %}
 						</td>

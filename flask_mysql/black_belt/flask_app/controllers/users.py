@@ -5,7 +5,7 @@ from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_bcrypt import Bcrypt
 from flask_app.models.user import User
-# from flask_app.models.painting import Painting
+from flask_app.models.band import Band
 
 bcrypt = Bcrypt(app)
 
@@ -15,9 +15,35 @@ def index():
     return render_template('index.html')
 
 
+# @app.route('/dashboard')
+# def dashboard():
+#     return render_template('dashboard.html')
+
+
 @app.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
+def bands():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        'id': session['user_id']
+    }
+    logged_in_user = User.get_user_by_id(data)
+    if logged_in_user == False:
+        return redirect('/')
+#######################
+    results = Band.get_all_bands()
+    print('********DATA RETURNED FROM DATABASE**********')
+    print(results)
+    bands = []
+
+    for band in results:
+        print('***********************')
+        print(band.band_name, '\n', band.founding_member, '\n', band.genre)
+        bands.append(band)
+        print('***********************')
+
+    return render_template('dashboard.html', logged_user=logged_in_user, bands=bands)
+
 
 
 @app.route('/register', methods=['POST'])
