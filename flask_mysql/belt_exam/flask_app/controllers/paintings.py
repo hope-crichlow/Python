@@ -31,7 +31,6 @@ def create_painting():
         }
 
 
-
     print('****************')
     print(data)
     Painting.save_painting(data)

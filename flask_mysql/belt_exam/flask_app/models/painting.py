@@ -22,7 +22,7 @@ class Painting:
     @classmethod
     def get_all_paintings(cls):
         query ="SELECT paintings.id, paintings.title, paintings.user_id, paintings.description, paintings.price, paintings.quantity, paintings.num_purchased, paintings.created_at, paintings.updated_at, GROUP_CONCAT(users.first_name, ' ', users.last_name) AS artist FROM paintings JOIN users ON paintings.user_id = users.id GROUP BY id;"
-     
+
         results = connectToMySQL('belt_exam').query_db(query)
         print('````````````````````````')
         print(results)
@@ -33,7 +33,7 @@ class Painting:
             print(results)
             paintings.append(cls(painting))
         return paintings
-   
+
     @classmethod
     def get_one(cls, id):
         query = "SELECT * FROM paintings WHERE id=%(id)s;"
