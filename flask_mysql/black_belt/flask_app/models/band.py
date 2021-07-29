@@ -44,6 +44,22 @@ class Band:
         band = cls(results[0])
         return band
 
+    @classmethod
+    def get_user_bands(cls):
+        query = "SELECT users.id, users.first_name, users.last_name, bands.founder_id, bands.band_name, band_member_roster.member_id, bands.genre, bands.home_city, bands.founding_member, bands.created_at, bands.updated_at FROM users JOIN band_member_roster ON users.id=band_member_roster.member_id JOIN bands ON band_member_roster.band_id=bands.id;"
+    
+        results = connectToMySQL('band_together').query_db(query)
+        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        print('\n', 'PPPPPPPPPPPPP', '\n', results, '\n', 'PPPPPPPPPPPPP', '\n')
+        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+
+        # Create an empty list to append our instances of bands
+        bands = []
+        # Iterate over the db results and create instances of bands with cls.
+        for band in results:
+            print(results)
+            bands.append(cls(band))
+        return bands
 
     @classmethod
     def save_band(cls, data):

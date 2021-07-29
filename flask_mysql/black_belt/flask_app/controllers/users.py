@@ -43,6 +43,7 @@ def register():
     
     # session['user_id'] = current_user[id]
     session['first_name'] = current_user.first_name
+    session['user_last_name'] = current_user.last_name
     print('//////////CURRENT USER >>>>>>', current_user.first_name)
 
 
@@ -58,6 +59,7 @@ def login():
     current_user = login_validation
     print('//////////', current_user)
     session['user_first_name'] = current_user.first_name
+    session['user_last_name'] = current_user.last_name
     session['user_id'] = current_user.id
     print('//////////', session['user_first_name'])
 
@@ -154,3 +156,42 @@ def edit_band_form(id):
     print(data)
     Band.edit_one(data)
     return redirect('/dashboard')
+
+@app.route('/mybands')
+def user_bands():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        'id': session['user_id']
+    }
+    logged_in_user = User.get_user_by_id(data)
+    if logged_in_user == False:
+        return redirect('/')
+    else:
+
+        results = Band.get_all_bands()
+       
+        print('********DATA RETURNED FROM DATABASE**********')
+        print(results)
+        my_bands = []
+
+        for band in results:
+            print('***********************')
+            print(band.band_name, '\n', band.founding_member, '\n', band.genre)
+            if band.founder_id == session['user_id']:
+                my_bands.append(band)
+            print('***********************')
+        print('BANDS***********************', my_bands)
+
+        results2 = Band.get_user_bands()
+        print('********DATA RETURNED FROM DATABASE2222222**********')
+        print(results2)
+        joined_bands = []
+        for bands in results2:
+            print('***********************')
+            # print(bands.band_name, bands.founder_id, session['user_id'] )
+            if bands.founder_id != session['user_id']:
+                print('madnessssssssssssssssss')
+                joined_bands.append(bands)
+            print('JOINED BANDS***********************', joined_bands)
+        return render_template('user_bands.html', logged_user=logged_in_user, bands=my_bands, joined_bands=joined_bands)
