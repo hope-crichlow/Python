@@ -41,9 +41,9 @@ class Petfinder:
         animal_breeds = pf.breeds()
         print('PPPPPP', animal_breeds)
 
-        for breed in animal_breeds['breeds']:
-            print(breed)
-            print(animal_breeds['breeds'][breed][0:3])
-            return animal_breeds
+        # for breed in animal_breeds['breeds']:
+        #     print(breed)
+        #     print(animal_breeds['breeds'][breed][2:10])
+        #     return animal_breeds
 
 pf = Petfinder.get_access()
