@@ -92,12 +92,11 @@ def edit_recipe_form(id):
 
     data = {
         'id': id,
-        'name': request.form['name'],
+        # 'name': request.form['name'],
         'description': request.form['description'],
         'instructions': request.form['instructions'],
         'date_made': request.form['date_made'],
         'under_thirty': request.form['under_thirty']
-
     }
     print('************************')
     print(data)

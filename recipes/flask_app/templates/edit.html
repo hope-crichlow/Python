@@ -72,6 +72,15 @@
 				<!-- <fieldset class="row mb-3"> -->
 				<div class="col-md-10">
 					<label class="form-label" for="under_thirty">Under 30 Minutes?</label>
+
+					<span class="d-flex align-items-center justify-content-around">
+						{% if selected_recipe.under_thirty == 1 %}
+						<input name="under_thirty" type="radio" value="1" checked />Yes
+						<input name="under_thirty" type="radio" value="0" />No {% else %}
+						<input name="under_thirty" type="radio" value="1" />Yes
+						<input name="under_thirty" type="radio" value="0" checked />No {%
+						endif %}
+					</span>
 					<div class="form-check">
 						<input
 							class="form-check-input"
